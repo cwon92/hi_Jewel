@@ -1,6 +1,5 @@
 package com.demo.jewel.security.jwt.provider;
 
-import com.demo.jewel.constants.SecurityConstants;
 import com.demo.jewel.dto.CustomUser;
 import com.demo.jewel.dto.UserAuth;
 import com.demo.jewel.dto.Users;
@@ -38,7 +37,7 @@ public class JwtTokenProvider {
         String jwt = Jwts.builder()
                 .signWith( getShaKey(), Jwts.SIG.HS512) //Keys.hmac~ 아래에 메서드로 만들어놓음 (getShaKey())
                 .header()
-                .add("typ", SecurityConstants.TOKEN_TYPE)
+                .add("typ", JwtConstants.TOKEN_TYPE)
                 .and()
                 .expiration( new Date( System.currentTimeMillis() + 864000000 ) )
                 .claim("uno", "" + userNo)

@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService{
         if(result > 0) {
             UserAuth userAuth = new UserAuth();
             userAuth.setUserId(user.getUserId());
-            userAuth.setAuth("ROLE_USER");
+            userAuth.setAuth("USER");
             result = userMapper.insertAuth(userAuth);
         }
 

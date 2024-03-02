@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.jwtTokenProvider = jwtTokenProvider;
 
         //필터 URL 경로 설정 : /login
-        setFilterProcessesUrl("/login");
+        setFilterProcessesUrl(JwtConstants.AUTH_LOGIN_URL);
     }
 
     //인증 시도 메서드

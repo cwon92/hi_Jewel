@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.jewel.server.mapper.UserMapper">
+<mapper namespace="com.demo.jewel.mapper.UserMapper">
 
     <resultMap id="userMap" type="Users">
         <id property="no" column="no"/>
@@ -26,7 +26,7 @@
     </resultMap>
 
     <!-- 회원 등록 -->
-    <insert id="insert">
+    <insert id="insert" parameterType="Users">
         insert into user( user_id, user_pw, name, email )
         values ( #{userId}, #{userPw}, #{name}, #{email} )
     </insert>
@@ -38,26 +38,26 @@
 
     <!-- 회원 조회 - id -->
     <select id="login" resultMap="userMap">
-        select u.no, u.user_id, u.user_pw, name, email, enabled,
-                reg_date, upd_date, auth
-        from user u left outer join user_auth a
-                ON u.user_id = a.user_id
-        where u.user_id = #{userId}
+        SELECT u.no, u.user_id, u.user_pw, u.name, u.email, u.enabled,
+        u.reg_date, u.upd_date, a.auth
+        FROM user u LEFT OUTER JOIN user_auth a
+        ON u.user_id = a.user_id
+        WHERE u.user_id = #{userId}
     </select>
 
     <!-- 회원 권한 등록 -->
-    <insert id="insertAuth">
+    <insert id="insertAuth" parameterType="UserAuth">
         insert into user_auth( user_id, auth )
-        values( ${userId}, #{auth} )
+        VALUES (#{userId}, #{auth})
     </insert>
 
     <!-- 회원 수정 -->
     <update id="update">
         UPDATE user
         set user_id = #{userId}
-            ,user_pw = #{userPw}
-            ,name = #{name}
-            ,email = #{email}
+        ,user_pw = #{userPw}
+        ,name = #{name}
+        ,email = #{email}
         WHERE user_id = #{userId}
     </update>
 
