@@ -70,7 +70,7 @@ public class UserController {
     }
 
     //회원 탈퇴
-    @Secured("ADMIN")
+    @Secured("USER")
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> delete(@PathVariable("userId") String userId) throws Exception{
         log.info("[DELETE] /users/{userId}");

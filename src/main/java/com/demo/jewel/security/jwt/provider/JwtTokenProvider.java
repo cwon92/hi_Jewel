@@ -39,8 +39,8 @@ public class JwtTokenProvider {
                 .header()
                 .add("typ", JwtConstants.TOKEN_TYPE)
                 .and()
-                .expiration( new Date( System.currentTimeMillis() + 864000000 ) )
-                .claim("uno", "" + userNo)
+                .expiration(new Date( System.currentTimeMillis() + 86400000) )
+                .claim("uno", userNo)
                 .claim("uid", userId)
                 .claim("rol", roles)
                 .compact();

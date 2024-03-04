@@ -38,6 +38,8 @@ dependencies {
 	// mysql
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	//webFlux
+	implementation 'org.springframework:spring-webflux:6.1.3'
 
 }
 

@@ -38,8 +38,8 @@
 
     <!-- 회원 조회 - id -->
     <select id="login" resultMap="userMap">
-        SELECT u.no, u.user_id, u.user_pw, u.name, u.email, u.enabled,
-        u.reg_date, u.upd_date, a.auth
+        SELECT u.no, u.user_id, user_pw, name, email, enabled,
+        reg_date, upd_date, auth
         FROM user u LEFT OUTER JOIN user_auth a
         ON u.user_id = a.user_id
         WHERE u.user_id = #{userId}
