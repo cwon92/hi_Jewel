@@ -4,6 +4,7 @@ import com.demo.jewel.dto.ImageResDto;
 import com.demo.jewel.upload.NamedByteArrayResource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
@@ -19,13 +20,30 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ImageServiceImpl implements ImageService{
+
+    @Autowired
+    private final WebClient webClient;
     private final String imgbbUrl = "https://api.imgbb.com/1/upload";
     private String secret = "98de50943f5634dd479c1cdf0604760d";
 
     @Override
-    public ImageResDto uploadImg(MultipartFile file) {
+    public Mono<ImageResDto> uploadImg(MultipartFile file) {
 
+        ImageResDto imageResDto = new ImageResDto();
+
+        return webClient.post()
+                .uri(imgbbUrl)
+                .body(Mono.just(imageResDto), ImageResDto.class)
+                .retrieve()
+                .bodyToMono(ImageResDto.class);
+
+
+
+
+
+        /*
         // 요청 바디 설정
+
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("key", secret);
         try {
@@ -55,5 +73,6 @@ public class ImageServiceImpl implements ImageService{
         log.info("============" + response + "============");
 
         return new ImageResDto();
+        */
     }
 }
