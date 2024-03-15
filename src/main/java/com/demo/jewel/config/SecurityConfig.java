@@ -54,6 +54,7 @@ public class SecurityConfig {
                 authorizeRequest
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()//정적자원 인가
                         .requestMatchers("/").permitAll()
+                        .requestMatchers("/upload").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/users/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
